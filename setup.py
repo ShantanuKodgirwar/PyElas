@@ -1,13 +1,17 @@
 import setuptools
 
+# Add numpy import
+import numpy as np
+
+# Define the extension
 elas = setuptools.Extension('elas', sources=[
-        'src/pyelas.cpp',
-        'src/elas.cpp',
-        'src/descriptor.cpp',
-        'src/filter.cpp',
-        'src/matrix.cpp',
-        'src/triangle.cpp',
-    ], define_macros=[('NPY_NO_DEPRECATED_API', 'NPY_1_7_API_VERSION')])
+    'src/pyelas.cpp',
+    'src/elas.cpp',
+    'src/descriptor.cpp',
+    'src/filter.cpp',
+    'src/matrix.cpp',
+    'src/triangle.cpp',
+], define_macros=[('NPY_NO_DEPRECATED_API', 'NPY_1_7_API_VERSION')])
 
 _long_descr = '''
 This package is the port to Python of libelas.
@@ -46,7 +50,11 @@ setuptools.setup(
     license='GPLv3',
     platforms=['Linux', 'Windows', 'Unix', 'macOS'],
     ext_modules=[elas],
+    # Add numpy include directory
+    include_dirs=[np.get_include()],
     install_requires=[
         'numpy>=1.7',
     ],
-    python_requires=">=3.5")
+    python_requires=">=3.5"
+)
+
